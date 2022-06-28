@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const stationSlice = createSlice({
     name:'stations',
@@ -6,8 +7,9 @@ export const stationSlice = createSlice({
         stations:[]
     },
     reducers:{
-        setStations: (state,action) => {
+        setStations:  (state,action) => {
             state.stations = action.payload
+            
         }
     }
 })
