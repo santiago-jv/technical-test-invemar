@@ -78,7 +78,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
  * ]
  */
 project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf' ] // Name of the font files you want to copy
+    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf' ] // Name of the font files you want to copy
 ]
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing

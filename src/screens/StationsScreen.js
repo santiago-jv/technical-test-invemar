@@ -8,7 +8,6 @@ const StationsScreen = ({navigation}) => {
   useEffect(() => {
     
     dispatch(fetchStations())
-    console.log(stations)
   }, [])
   
   return (

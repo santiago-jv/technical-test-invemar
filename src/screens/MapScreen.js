@@ -1,11 +1,21 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import React, { useEffect } from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import { useSelector, useDispatch } from 'react-redux';
+import MarkerContent from '../components/MarkerContent';
+import { fetchStations } from '../redux/slices/stations/actions';
 
 const MapScreen = () => {
+  const {stations} = useSelector(state => state.stations)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    
+    dispatch(fetchStations())
+  }, [])
   return (
     <View style={styles.container}>
       <MapView
+        
         provider={PROVIDER_GOOGLE} 
         style={styles.map}
         region={{
@@ -13,7 +23,26 @@ const MapScreen = () => {
           longitude: -74.2174168,
           latitudeDelta: 0.015,
           longitudeDelta: 0.0121,
-        }}></MapView>
+        }}>
+          <>
+          {stations.map(station => (
+            <Marker
+              title={station.place}
+              description={
+                `${station.latitude},${station.longitude}`
+              }
+            
+              key={station.id}
+              coordinate={{
+                latitude:Number(station.latitude),
+                longitude:Number(station.longitude)
+              }}
+            >
+             <MarkerContent station={station}/>
+            </Marker>
+          ))}
+          </>
+        </MapView>
     </View>
   );
 };
