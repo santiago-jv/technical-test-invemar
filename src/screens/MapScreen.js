@@ -38,7 +38,7 @@ const MapScreen = () => {
                 longitude:Number(station.longitude)
               }}
             >
-             <MarkerContent station={station}/>
+             <MarkerContent/>
             </Marker>
           ))}
           </>

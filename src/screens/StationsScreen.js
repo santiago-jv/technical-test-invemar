@@ -1,23 +1,33 @@
-import React, { useEffect } from 'react'
-import { Button, Text, View } from 'react-native'
-import { fetchStations } from '../redux/slices/stations/actions'
-import {useDispatch, useSelector} from 'react-redux'
+import React, {useEffect} from 'react';
+import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
+import {fetchStations} from '../redux/slices/stations/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import FloatingActionButton from '../components/FloatingActionButton';
+import StationItem from '../components/StationItem';
 const StationsScreen = ({navigation}) => {
-  const dispatch = useDispatch()
-  const {stations} = useSelector(state=> state.stations)
+  const dispatch = useDispatch();
+  const {stations} = useSelector(state => state.stations);
   useEffect(() => {
-    
-    dispatch(fetchStations())
-  }, [])
-  
-  return (
-   <View>
-    <Button title='Add station' onPress={()=>navigation.navigate('AddStationScreen')}></Button>
-    {stations.map(station => (
-      <Text key={station.id}>{station.place}</Text>
-    ))}
-   </View>
-  )
-}
+    dispatch(fetchStations());
+  }, []);
 
-export default StationsScreen
+  return (
+    <>
+      <FloatingActionButton
+        onPress={() => navigation.navigate('AddStationScreen')}
+      />
+      <View>
+        <FlatList
+          data={stations}
+          renderItem={({item,index,separators})=> (
+            <StationItem key={index} station={item} separators={separators}/>
+          )}
+        >
+        </FlatList>
+   
+      </View>
+    </>
+  );
+};
+
+export default StationsScreen;

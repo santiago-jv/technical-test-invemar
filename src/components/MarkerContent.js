@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { mainColor } from '../constants';
 
-const MarkerContent = ({station}) => {
+const MarkerContent = () => {
 
   return (
     <View styles={styles.container}>
-      <Icon name="map-marker" color={'rgb(15,130,255)'} size={30}></Icon>
+      <Icon name="place" color={mainColor} size={30}></Icon>
     </View>
   );
 };

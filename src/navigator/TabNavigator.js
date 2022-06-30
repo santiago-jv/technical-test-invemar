@@ -3,13 +3,14 @@ import React from 'react';
 import TabIcon from '../components/TabIcon';
 import StationsScreen from '../screens/StationsScreen';
 import MapScreen from '../screens/MapScreen';
+import { mainColor } from '../constants';
 
 const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: 'rgb(15,130,255)',
+        tabBarActiveTintColor:mainColor,
       }}>
       <Tab.Screen
         options={{

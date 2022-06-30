@@ -11,15 +11,10 @@ import {
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addStation } from '../redux/slices/stations/actions';
-import * as yup from 'yup'
+import { mainColor } from '../constants';
+import { validationStationSchema } from '../validators/StationSchema';
 
 
-const isRequiredMessage = 'Field required.'
-const validationSchema = yup.object({
-  place:yup.string().required(isRequiredMessage),
-  latitude:yup.number().min(-90).max(90).required('The latitude range must be between -90 and 90 and must be required.'),
-  longitude:yup.number().min(-180).max(180).required('The longitude range must be between -180 and 180 and must be required.'),
-})
 
 const AddStationScreen = ({navigation}) => {
   const formik = useFormik({
@@ -28,8 +23,9 @@ const AddStationScreen = ({navigation}) => {
       latitude:'',
       longitude:''
     },
-    validationSchema:validationSchema,
-    onSubmit: (values)=> sendStation(values)
+    validationSchema:validationStationSchema,
+    onSubmit: (values)=> sendStation(values),
+    validateOnChange:false,
   })
   const dispatch = useDispatch()
 
@@ -102,7 +98,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   formGroup: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   formLabel: {
     fontSize: 20,
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     color:'#333'
   },
   formInput: {
-    borderColor: 'rgb(15,130,255)',
+    borderColor: mainColor,
     borderWidth: 3,
     height: 50,
     fontSize: 20,
